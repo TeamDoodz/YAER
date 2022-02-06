@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="0Harmony">
+      <HintPath>..\..\YAER\YAER\lib\0Harmony.dll</HintPath>
+    </Reference>
+    <Reference Include="API">
+      <HintPath>..\..\YAER\YAER\lib\API.dll</HintPath>
+    </Reference>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>..\..\YAER\YAER\lib\Assembly-CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="BepInEx">
+      <HintPath>..\..\YAER\YAER\lib\BepInEx.dll</HintPath>
+    </Reference>
+    <Reference Include="Infiniscryption.Spells">
+      <HintPath>lib\Infiniscryption.Spells.dll</HintPath>
+    </Reference>
+    <Reference Include="TDLib">
+      <HintPath>lib\TDLib.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\YAER\YAER\lib\UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>..\..\YAER\YAER\lib\UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
+		<Reference Include="Sirenix.Serialization">
+			<HintPath>..\..\YAER\YAER\lib\Sirenix.Serialization.dll</HintPath>
+		</Reference>
+  </ItemGroup>
+
+</Project>

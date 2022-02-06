@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30104.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YAER", "YAER\YAER.csproj", "{D97CD1AE-D5E4-4AFA-BD13-792BFCDD3D8A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D97CD1AE-D5E4-4AFA-BD13-792BFCDD3D8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D97CD1AE-D5E4-4AFA-BD13-792BFCDD3D8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D97CD1AE-D5E4-4AFA-BD13-792BFCDD3D8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D97CD1AE-D5E4-4AFA-BD13-792BFCDD3D8A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E43F6E2D-6D72-4E4A-8E0A-D9474EC8E4FA}
+	EndGlobalSection
+EndGlobal

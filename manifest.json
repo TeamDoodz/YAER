@@ -1,0 +1,11 @@
+{
+    "name": "YAER",
+    "version_number": "1.0.0",
+    "website_url": "https://github.com/TeamDoodz/YAER",
+    "description": "Yet Another Enemy Replacer",
+    "dependencies": [
+        "API_dev-API-1.12.1",
+        "BepInEx-BepInExPack_Inscryption-5.4.1701",
+		"TeamDoodz-TDLib-1.1.0"
+    ]
+}
