@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Text;
 using APIPlugin;
 using BepInEx.Bootstrap;
@@ -159,14 +160,7 @@ namespace YAER.Patchers {
 					if (SpellMod) {
 						MainPlugin.logger.LogDebug("spell mod present");
 						// no spells
-						if (card.SpecialAbilities.Contains(GlobalSpellAbility.ID.id)) {
-							//MainPlugin.logger.LogDebug($"{card.name} is a spell");
-							continue;
-						}
-						if (card.SpecialAbilities.Contains(TargetedSpellAbility.ID.id)) {
-							//MainPlugin.logger.LogDebug($"{card.name} is a spell");
-							continue;
-						}
+						if (IsSpell(card)) continue;
 					}
 				}
 
@@ -190,6 +184,18 @@ namespace YAER.Patchers {
 			get {
 				return Chainloader.PluginInfos.ContainsKey("zorro.inscryption.infiniscryption.spells");
 			}
+		}
+		[MethodImpl(MethodImplOptions.NoInlining)]
+		private static bool IsSpell(CardInfo card) {
+			if (card.SpecialAbilities.Contains(GlobalSpellAbility.ID.id)) {
+				//MainPlugin.logger.LogDebug($"{card.name} is a spell");
+				return true;
+			}
+			if (card.SpecialAbilities.Contains(TargetedSpellAbility.ID.id)) {
+				//MainPlugin.logger.LogDebug($"{card.name} is a spell");
+				return true;
+			}
+			return false;
 		}
 	}
 }
