@@ -141,7 +141,7 @@ namespace YAER.Patchers {
 						}
 					}
 
-					if(!(card.metaCategories.Contains(CardMetaCategory.Rare) || card.metaCategories.Contains(CardMetaCategory.ChoiceNode) || card.metaCategories.Contains(CardMetaCategory.TraderOffer)) {
+					if(!(card.metaCategories.Contains(CardMetaCategory.Rare) || card.metaCategories.Contains(CardMetaCategory.ChoiceNode) || card.metaCategories.Contains(CardMetaCategory.TraderOffer))) {
 						// card is unobtainable
 						continue;
 					}
