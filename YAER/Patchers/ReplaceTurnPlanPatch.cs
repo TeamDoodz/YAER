@@ -141,6 +141,11 @@ namespace YAER.Patchers {
 						}
 					}
 
+					if(!(card.metaCategories.Contains(CardMetaCategory.Rare) || card.metaCategories.Contains(CardMetaCategory.ChoiceNode) || card.metaCategories.Contains(CardMetaCategory.TraderOffer)) {
+						// card is unobtainable
+						continue;
+					}
+
 					{
 						bool usable = true;
 						foreach (var sigil in card.Abilities) {
