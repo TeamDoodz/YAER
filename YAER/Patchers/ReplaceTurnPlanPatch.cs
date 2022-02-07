@@ -153,6 +153,7 @@ namespace YAER.Patchers {
 
 					// only check if card is spell if spell mod is present
 					if (SpellMod) {
+						MainPlugin.logger.LogDebug("spell mod present");
 						// no spells
 						if (card.SpecialAbilities.Contains(GlobalSpellAbility.ID.id)) {
 							//MainPlugin.logger.LogDebug($"{card.name} is a spell");
