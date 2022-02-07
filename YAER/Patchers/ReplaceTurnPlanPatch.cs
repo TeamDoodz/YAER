@@ -24,6 +24,12 @@ namespace YAER.Patchers {
 		static void Prefix(EncounterData encounterData) { // if this doesn't work, try adding ref before the arg type
 			if (!SaveManager.SaveFile.IsPart1) return; // mod only does things in act 1
 
+			if(SpellMod) {
+				MainPlugin.logger.LogMessage("Spell mod is present");
+			} else {
+				MainPlugin.logger.LogMessage("Spell mod is not present");
+			}
+
 			List<List<CardInfo>> cardsToPlay = encounterData.opponentTurnPlan;
 
 			MainPlugin.logger.LogMessage($"----Editing Blueprint----");
