@@ -40,12 +40,14 @@ namespace YAER.Patchers {
 
 				// first, we replace all cards in the current turn plan with new ones
 
+				MainPlugin.logger.LogDebug("about to start for loop for this turn");
 				for (int card = 0; card < cardsToPlay[turn].Count; card++) {
 					if (NewCard.cards.Contains(cardsToPlay[turn][card])) {
 						// we dont want to touch modded blueprints
 						MainPlugin.logger.LogMessage($"----Canceled editing blueprint; blueprint is modded----");
 						return;
 					}
+					MainPlugin.logger.LogDebug($"about to call {nameof(FindEqualReplacement)}");
 					CardInfo replace = FindEqualReplacement(cardsToPlay[turn][card], Leeway, seed);
 
 					MainPlugin.logger.LogInfo($"Replacing {cardsToPlay[turn][card].name} ({cardsToPlay[turn][card].PowerLevel}) with {replace.name} ({replace.PowerLevel})");
@@ -112,6 +114,8 @@ namespace YAER.Patchers {
 			encounterData.opponentTurnPlan = cardsToPlay;
 		}
 		static CardInfo FindEqualReplacement(CardInfo other, int leeway, int seed) {
+			MainPlugin.logger.LogDebug("starting to replace card");
+
 			List<CardInfo> replacements = new List<CardInfo>();
 			foreach (var card in NewCard.cards) {
 				{
