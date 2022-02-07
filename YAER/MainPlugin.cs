@@ -15,7 +15,7 @@ namespace YAER {
 
 		internal const string GUID = "io.github.TeamDoodz." + Name;
 		internal const string Name = "YAER";
-		internal const string Version = "1.0.0";
+		internal const string Version = "0.1.1";
 
 		internal static ManualLogSource logger;
 
