@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using APIPlugin;
+using BepInEx.Bootstrap;
 using DiskCardGame;
 using HarmonyLib;
 using Infiniscryption.Spells.Sigils;
@@ -34,7 +35,7 @@ namespace YAER.Patchers {
 				// first, we replace all cards in the current turn plan with new ones
 
 				for (int card = 0; card < cardsToPlay[turn].Count; card++) {
-					if(NewCard.cards.Contains(cardsToPlay[turn][card])) {
+					if (NewCard.cards.Contains(cardsToPlay[turn][card])) {
 						// we dont want to touch modded blueprints
 						MainPlugin.logger.LogMessage($"----Canceled editing blueprint; blueprint is modded----");
 						return;
@@ -59,7 +60,7 @@ namespace YAER.Patchers {
 				int gems = BoardManager.Instance.GemsOnBoard();
 				int conduits = BoardManager.Instance.ConduitsOnBoard();
 
-				for(int i=0; i< cardsToPlay[turn].Count; i++) {
+				for (int i = 0; i < cardsToPlay[turn].Count; i++) {
 					// do various things depending on a cards data
 
 					if (doConduits) {
@@ -92,10 +93,10 @@ namespace YAER.Patchers {
 					}
 				}
 				// if there are still cards left in playNextTurn, add them here
-				if(playNextTurn.Count > 0) {
+				if (playNextTurn.Count > 0) {
 					MainPlugin.logger.LogMessage($"---Editing turn {cardsToPlay.Count}---");
 					var play = new List<CardInfo>();
-					foreach(var card in playNextTurn) {
+					foreach (var card in playNextTurn) {
 						MainPlugin.logger.LogInfo($"Adding {card.name} ({card.PowerLevel}) to opponent queue");
 						play.Add(card);
 					}
@@ -114,7 +115,7 @@ namespace YAER.Patchers {
 					if (card.temple != CardTemple.Nature) continue;
 
 					// rare cards should only be replaced by rare cards
-					if(other.metaCategories.Contains(CardMetaCategory.Rare)) {
+					if (other.metaCategories.Contains(CardMetaCategory.Rare)) {
 						if (!card.metaCategories.Contains(CardMetaCategory.Rare)) continue;
 					}
 
@@ -137,21 +138,24 @@ namespace YAER.Patchers {
 							// transformer cards will never be not op, dont use them
 							if (sigil == Ability.Transformer) usable = false;
 							// if other card has evolve sigil, only use evolving cards
-							if(sigil == Ability.Evolve && careAboutEvolve) {
+							if (sigil == Ability.Evolve && careAboutEvolve) {
 								if (!card.Abilities.Contains(Ability.Evolve)) continue;
 							}
 						}
 						if (!usable) continue;
 					}
 
-					// no spells
-					if (card.SpecialAbilities.Contains(GlobalSpellAbility.ID.id)) {
-						//MainPlugin.logger.LogDebug($"{card.name} is a spell");
-						continue;
-					}
-					if (card.SpecialAbilities.Contains(TargetedSpellAbility.ID.id)) {
-						//MainPlugin.logger.LogDebug($"{card.name} is a spell");
-						continue;
+					// only check if card is spell if spell mod is present
+					if (SpellMod) {
+						// no spells
+						if (card.SpecialAbilities.Contains(GlobalSpellAbility.ID.id)) {
+							//MainPlugin.logger.LogDebug($"{card.name} is a spell");
+							continue;
+						}
+						if (card.SpecialAbilities.Contains(TargetedSpellAbility.ID.id)) {
+							//MainPlugin.logger.LogDebug($"{card.name} is a spell");
+							continue;
+						}
 					}
 				}
 
@@ -162,11 +166,19 @@ namespace YAER.Patchers {
 				}
 			}
 			MainPlugin.logger.LogDebug($"Possible replacements: {replacements.Count}");
-			if(replacements.Count > 0) {
+			if (replacements.Count > 0) {
 				return replacements[SeededRandom.Range(0, replacements.Count, seed)];
 			}
 			MainPlugin.logger.LogWarning($"Could not find replacement for {other}. Consider going into the config and making replacements broader.");
 			return other; // couldnt find one :peeposad:
+		}
+		/// <summary>
+		/// Whether or not the Spell Card Toolkit mod is present.
+		/// </summary>
+		private static bool SpellMod {
+			get {
+				return Chainloader.PluginInfos.ContainsKey("zorro.inscryption.infiniscryption.spells");
+			}
 		}
 	}
 }

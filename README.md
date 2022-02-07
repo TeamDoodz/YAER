@@ -23,5 +23,8 @@ YAER will replace all cards in that plan via the following algorithm:
 
 ## Changelog
 
+### 0.1.1
+* Removed dependancy to Spell Card Toolkit
+
 ### 0.1.0
 * Initial Release

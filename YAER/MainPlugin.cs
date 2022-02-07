@@ -9,7 +9,7 @@ using DiskCardGame;
 namespace YAER {
 	[BepInPlugin(GUID, Name, Version)]
 	[BepInDependency("cyantist.inscryption.api")]
-	[BepInDependency("zorro.inscryption.infiniscryption.spells")]
+	[BepInDependency("zorro.inscryption.infiniscryption.spells", BepInDependency.DependencyFlags.SoftDependency)]
 	[BepInDependency("io.github.TeamDoodz.TDLib")]
 	public class MainPlugin : BaseUnityPlugin {
 
