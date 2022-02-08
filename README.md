@@ -24,6 +24,9 @@ YAER will replace all cards in that plan via the following algorithm:
 
 ## Changelog
 
+### 0.1.2
+* "Fixed" an error with some cards
+
 ### 0.1.1
 * Removed dependancy to Spell Card Toolkit
 * Leshy will no longer play unobtainable cards

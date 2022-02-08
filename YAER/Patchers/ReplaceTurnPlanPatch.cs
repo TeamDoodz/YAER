@@ -119,60 +119,67 @@ namespace YAER.Patchers {
 
 			List<CardInfo> replacements = new List<CardInfo>();
 			foreach (var card in NewCard.cards) {
-				{
-					// Make sure the card can be used by the opponent
-
-					// act 1 cards only
-					if (card.temple != CardTemple.Nature) continue;
-
-					// rare cards should only be replaced by rare cards
-					if (other.metaCategories.Contains(CardMetaCategory.Rare)) {
-						if (!card.metaCategories.Contains(CardMetaCategory.Rare)) continue;
-					}
-
-					if (careAboutBlocker) {
-						// blockers should only replace blockers
-						if (other.Attack == 0) {
-							//MainPlugin.logger.LogDebug($"{card.name} is a blocker");
-							if (card.Attack != 0) continue;
-						} else {
-							//MainPlugin.logger.LogDebug($"{card.name} is not a blocker");
-							if (card.Attack == 0) continue;
-						}
-					}
-
-					if(!(card.metaCategories.Contains(CardMetaCategory.Rare) || card.metaCategories.Contains(CardMetaCategory.ChoiceNode) || card.metaCategories.Contains(CardMetaCategory.TraderOffer))) {
-						// card is unobtainable
-						continue;
-					}
-
+				try {
+					MainPlugin.logger.LogDebug($"checkign card {card.name}");
 					{
-						bool usable = true;
-						foreach (var sigil in card.Abilities) {
-							// if card has any player-only sigils get rid of it
-							if (!AbilitiesUtil.GetInfo(sigil).opponentUsable) usable = false;
-							// transformer cards will never be not op, dont use them
-							if (sigil == Ability.Transformer) usable = false;
-							// if other card has evolve sigil, only use evolving cards
-							if (sigil == Ability.Evolve && careAboutEvolve) {
-								if (!card.Abilities.Contains(Ability.Evolve)) continue;
+						// Make sure the card can be used by the opponent
+
+						// act 1 cards only
+						if (card.temple != CardTemple.Nature) continue;
+
+						// rare cards should only be replaced by rare cards
+						if (other.metaCategories.Contains(CardMetaCategory.Rare)) {
+							MainPlugin.logger.LogDebug($"checking rare");
+							if (!card.metaCategories.Contains(CardMetaCategory.Rare)) continue;
+						}
+
+						if (careAboutBlocker) {
+							MainPlugin.logger.LogDebug($"checking blocker");
+							// blockers should only replace blockers
+							if (other.Attack == 0) {
+								//MainPlugin.logger.LogDebug($"{card.name} is a blocker");
+								if (card.Attack != 0) continue;
+							} else {
+								//MainPlugin.logger.LogDebug($"{card.name} is not a blocker");
+								if (card.Attack == 0) continue;
 							}
 						}
-						if (!usable) continue;
+
+						if (!(card.metaCategories.Contains(CardMetaCategory.Rare) || card.metaCategories.Contains(CardMetaCategory.ChoiceNode) || card.metaCategories.Contains(CardMetaCategory.TraderOffer))) {
+							// card is unobtainable
+							continue;
+						}
+
+						{
+							bool usable = true;
+							foreach (var sigil in card.Abilities) {
+								// if card has any player-only sigils get rid of it
+								if (!AbilitiesUtil.GetInfo(sigil).opponentUsable) usable = false;
+								// transformer cards will never be not op, dont use them
+								if (sigil == Ability.Transformer) usable = false;
+								// if other card has evolve sigil, only use evolving cards
+								if (sigil == Ability.Evolve && careAboutEvolve) {
+									if (!card.Abilities.Contains(Ability.Evolve)) continue;
+								}
+							}
+							if (!usable) continue;
+						}
+
+						// only check if card is spell if spell mod is present
+						if (SpellMod) {
+							MainPlugin.logger.LogDebug("spell mod present");
+							// no spells
+							if (IsSpell(card)) continue;
+						}
 					}
 
-					// only check if card is spell if spell mod is present
-					if (SpellMod) {
-						MainPlugin.logger.LogDebug("spell mod present");
-						// no spells
-						if (IsSpell(card)) continue;
+					int min = other.PowerLevel - leeway;
+					int max = other.PowerLevel + leeway;
+					if (min <= card.PowerLevel && card.PowerLevel <= max) {
+						replacements.Add(card);
 					}
-				}
-
-				int min = other.PowerLevel - leeway;
-				int max = other.PowerLevel + leeway;
-				if (min <= card.PowerLevel && card.PowerLevel <= max) {
-					replacements.Add(card);
+				} catch(Exception e) {
+					MainPlugin.logger.LogWarning($"Failed to check if card {card.name} is a suitable replacement: {e}");
 				}
 			}
 			MainPlugin.logger.LogDebug($"Possible replacements: {replacements.Count}");
