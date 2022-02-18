@@ -44,7 +44,7 @@ namespace YAER.Patchers {
 
 				MainPlugin.logger.LogDebug("about to start for loop for this turn");
 				for (int card = 0; card < cardsToPlay[turn].Count; card++) {
-					if (NewCard.cards.Contains(cardsToPlay[turn][card])) {
+					if (CardManager.AllCardsCopy.Contains(cardsToPlay[turn][card])) {
 						// we dont want to touch modded blueprints
 						MainPlugin.logger.LogMessage($"----Canceled editing blueprint; blueprint is modded----");
 						return;

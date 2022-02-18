@@ -20,6 +20,9 @@
     <Reference Include="Infiniscryption.Spells">
       <HintPath>lib\Infiniscryption.Spells.dll</HintPath>
     </Reference>
+    <Reference Include="InscryptionAPI">
+      <HintPath>lib\InscryptionAPI.dll</HintPath>
+    </Reference>
     <Reference Include="TDLib">
       <HintPath>lib\TDLib.dll</HintPath>
     </Reference>
