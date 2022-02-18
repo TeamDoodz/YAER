@@ -119,6 +119,7 @@ namespace YAER.Patchers {
 			MainPlugin.logger.LogDebug("starting to replace card");
 
 			List<CardInfo> replacements = new List<CardInfo>();
+			MainPlugin.logger.LogDebug($"{nameof(CardManager.AllCardsCopy)} has {CardManager.AllCardsCopy.Count} cards");
 			foreach (var card in CardManager.AllCardsCopy) {
 				try {
 					MainPlugin.logger.LogDebug($"checkign card {card.name}");
