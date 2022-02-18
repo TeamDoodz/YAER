@@ -20,9 +20,11 @@ YAER will replace all cards in that plan via the following algorithm:
 9. Remove all spell cards.
 10. Replace the card with a random card from the above list.
 11. If the replaced card synergizes with gems, play a random gem alongside it.
-12. If the replaced card synergizes with conduits, play two null conduits on the next turn.
+12. If the replaced card synergizes with conduits, play two null conduits on the next turn.\
 
 ## Changelog
+
+### 0.2.0
 
 ### 0.1.2
 * "Fixed" an error with some cards

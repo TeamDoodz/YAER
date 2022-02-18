@@ -7,6 +7,7 @@ using BepInEx.Bootstrap;
 using DiskCardGame;
 using HarmonyLib;
 using Infiniscryption.Spells.Sigils;
+using InscryptionAPI.Card;
 using TDLib.GameContent;
 using UnityEngine;
 
@@ -118,7 +119,7 @@ namespace YAER.Patchers {
 			MainPlugin.logger.LogDebug("starting to replace card");
 
 			List<CardInfo> replacements = new List<CardInfo>();
-			foreach (var card in NewCard.cards) {
+			foreach (var card in CardManager.AllCardsCopy) {
 				try {
 					MainPlugin.logger.LogDebug($"checkign card {card.name}");
 					{
@@ -168,8 +169,8 @@ namespace YAER.Patchers {
 						// only check if card is spell if spell mod is present
 						if (SpellMod) {
 							MainPlugin.logger.LogDebug("spell mod present");
-							// no spells
-							if (IsSpell(card)) continue;
+							// no spells (spell mod not updated yet)
+							//if (IsSpell(card)) continue;
 						}
 					}
 
@@ -197,7 +198,8 @@ namespace YAER.Patchers {
 				return Chainloader.PluginInfos.ContainsKey("zorro.inscryption.infiniscryption.spells");
 			}
 		}
-		[MethodImpl(MethodImplOptions.NoInlining)]
+		//[MethodImpl(MethodImplOptions.NoInlining)]
+		/*
 		private static bool IsSpell(CardInfo card) {
 			if (card.SpecialAbilities.Contains(GlobalSpellAbility.ID.id)) {
 				//MainPlugin.logger.LogDebug($"{card.name} is a spell");
@@ -209,5 +211,6 @@ namespace YAER.Patchers {
 			}
 			return false;
 		}
+		*/
 	}
 }
