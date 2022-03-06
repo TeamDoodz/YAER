@@ -24,7 +24,8 @@ YAER will replace all cards in that plan via the following algorithm:
 
 ## Changelog
 
-### 0.2.0
+### 1.0.0
+* Mod now requires Kaycee's Mod and the API 2.0
 
 ### 0.1.2
 * "Fixed" an error with some cards
